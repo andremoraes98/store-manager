@@ -1,14 +1,14 @@
-const ServiceProduct = require('../services/servicesProducts');
+const ServiceProducts = require('../services/servicesProducts');
 
 const getAll = async (_req, res) => {
-  const products = await ServiceProduct.getAll();
+  const products = await ServiceProducts.getAll();
 
   return res.status(200).json(products);  
 };
 
 const getById = async (req, res) => {
   const { id } = req.params;
-  const product = await ServiceProduct.getById(id);
+  const product = await ServiceProducts.getById(id);
 
   if (!product) {
     return res
@@ -20,7 +20,7 @@ const getById = async (req, res) => {
 
 const create = async (req, res) => {
   const { name } = req.body;
-  const product = await ServiceProduct.create(name);
+  const product = await ServiceProducts.create(name);
 
   res.status(201).json(product);  
 };
