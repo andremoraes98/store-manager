@@ -28,7 +28,23 @@ const validateQuantity = (req, res, next) => {
   next();
 };
 
+const validateQuantityLength = (req, res, next) => {
+  const arrayOfProducts = req.body;
+
+  const invalidQuantity = arrayOfProducts
+    .find(({ quantity }) => quantity > 0);
+
+  if (!invalidQuantity) {
+    return res
+      .status(422)
+      .json({ message: '"quantity" must be greater than or equal to 1' });
+  }
+
+  next();
+};
+
 module.exports = {
   validateProductId,
   validateQuantity,
+  validateQuantityLength,
 };

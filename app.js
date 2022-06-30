@@ -25,6 +25,7 @@ app.post('/products',
 app.post('/sales',
   MiddlewaresSales.validateProductId,
   MiddlewaresSales.validateQuantity,
+  MiddlewaresSales.validateQuantityLength,
   ControllerSales.create);
 
 // não remova essa exportação, é para o avaliador funcionar
