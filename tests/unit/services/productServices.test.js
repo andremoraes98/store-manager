@@ -66,16 +66,10 @@ describe('Valida os produtos recebidos', () => {
       ModelProduct.getById.restore();
     });
 
-    it('espera que o retorno seja um objeto.', async () => {
+    it('espera que o retorno seja um objeto com as chaves "id" e "name".', async () => {
       const product = await ServiceProduct.getById(3);
 
-      expect(product).to.be.a('object')
-    });
-
-    it('esperado que os objetos tenham uma chave "id" e uma chave "name".', async () => {
-      const product = await ServiceProduct.getById(3);
-
-      expect(product).to.be.an('object').with.keys('id', 'name');
+      expect(product).to.be.a('object').with.keys('id', 'name');
     });
   });
 
@@ -113,15 +107,9 @@ describe('Valida o produto criado', () => {
 
 
 
-  it('espera que o retorno seja um objeto.', async () => {
+  it('espera que o retorno seja um objeto com as chaves "id" e "name"..', async () => {
     const product = await ServiceProduct.create(PRODUCT_NAME);
 
-    expect(product).to.be.a('object');
-  });
-
-  it('esperado que os objetos tenham uma chave "id" e uma chave "name".', async () => {
-    const product = await ServiceProduct.create(PRODUCT_NAME);
-
-    expect(product).to.be.an('object').with.keys('id', 'name');
+    expect(product).to.be.a('object').with.keys('id', 'name');
   });
 });
