@@ -2,7 +2,7 @@ const validateProductId = (req, res, next) => {
   const arrayOfProducts = req.body;
 
   const invalidProductId = arrayOfProducts
-    .find((product) => product.productId !== undefined);
+    .find(({ productId }) => productId !== undefined);
   
   if (!invalidProductId) {
     return res

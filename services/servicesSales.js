@@ -7,6 +7,13 @@ const create = async (arrayOfProduct) => {
   return sale;
 };
 
+const isProductIdValid = async (productId) => {
+  const allProducts = await ModelSales.getIdProducts();
+
+  return allProducts.includes(productId);
+};
+
 module.exports = {
   create,
+  isProductIdValid,
 };

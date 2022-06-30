@@ -22,8 +22,16 @@ const createSaleProduct = async (arrayOfProduct) => {
     saleId,
     itemsSold: arrayOfProduct,
   };
-};  
+};
+
+const getIdProducts = async () => {
+  const idProducts = await connection
+    .query('SELECT id FROM StoreManager.products');
+  
+  return idProducts;
+};
   
 module.exports = {
   createSaleProduct,
+  getIdProducts,
 };
