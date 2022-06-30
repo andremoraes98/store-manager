@@ -1,7 +1,7 @@
 const connection = require('./connection');
 
 const create = async () => {
-  const [result] = connection.query(
+  const [result] = await connection.query(
     'INSERT INTO StoreManager.sales VALUES ();',
   );
 
