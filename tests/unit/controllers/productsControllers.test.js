@@ -79,7 +79,8 @@ describe('Retorna todos os produtos', () => {
     const req = {};
     const res = {};
 
-    before(() => {sinon.stub(ProductService, 'getById').resolves(undefined);
+    before(() => {
+      sinon.stub(ProductService, 'getById').resolves(undefined);
 
       req.params = { id: 10 };
 

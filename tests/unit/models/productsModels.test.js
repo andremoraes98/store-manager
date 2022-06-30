@@ -36,11 +36,11 @@ describe('Retorna os produtos', () => {
       expect(result).to.be.a('array');
     });
 
-    it('esperado que os objetos tenham uma chave "id".', async () => {
+    it('esperado que os objetos tenham uma chave "id" e uma chave "name".', async () => {
       const result = await ModelProduct.getAll();
 
       result.map((product) => {
-        expect(product).to.have.property('id');
+        expect(product).to.be.an('object').with.keys('id', 'name');
       })
     });
   });
