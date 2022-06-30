@@ -77,3 +77,25 @@ describe('Retorna os produtos', () => {
     });
   });
 });
+
+describe('Retorna o produto criado', () => {
+  const PRODUCT_NAME = 'Manopla do Thanos';
+
+  before(async () => {
+    const result = [{
+      insertId: 4,
+    }];
+
+    sinon.stub(connection, 'query').resolves(result);;
+  });
+
+  after(async () => {
+    connection.query.restore();
+  });
+
+  it('espera que o retorno seja um objeto e tenha as chaves "id" e "name".', async () => {
+    const result = await ModelProduct.create(PRODUCT_NAME);
+
+    expect(result).to.be.an('object').with.keys('id', 'name');
+  });
+});
