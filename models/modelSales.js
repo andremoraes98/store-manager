@@ -8,13 +8,13 @@ const create = async () => {
   return result.insertId;
 };
 
-const createProduct = async (arrayOfProduct) => {
+const createSaleProduct = async (arrayOfProduct) => {
   const saleId = await create();
 
-  arrayOfProduct.map(async (product) => {
+  arrayOfProduct.map(async ({ productId, quantity }) => {
     await connection.query(
       'INSERT INTO StoreManager.sales_products (sale_id, product_id, quantity) VALUES (?, ?, ?);',
-      [saleId, product.productId, product.quantity],
+      [saleId, productId, quantity],
     );
   });
 
@@ -25,5 +25,5 @@ const createProduct = async (arrayOfProduct) => {
 };  
   
 module.exports = {
-  createProduct,
+  createSaleProduct,
 };
