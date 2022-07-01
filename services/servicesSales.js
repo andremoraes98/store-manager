@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 const ModelSales = require('../models/modelSales');
 
 const create = async (arrayOfProduct) => {
@@ -13,10 +14,17 @@ const productId = async () => {
   return (allProducts).map(({ id }) => id);
 };
 
+const serialize = ({ date, product_id, quantity, sale_id }) => ({
+    saleId: sale_id,
+    productId: product_id,
+    date,
+    quantity,
+  });
+
 const getAll = async () => {
   const result = await ModelSales.getAll();
 
-  return result;
+  return result.map(serialize);
 };
 
 module.exports = {

@@ -47,7 +47,7 @@ const getAll = async () => {
   ORDER BY
     sales_products.sale_id, sales_products.product_id`;
   
-  const result = await connection.query(query);
+  const [result] = await connection.query(query);
 
   return result;
 };
