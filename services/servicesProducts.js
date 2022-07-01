@@ -31,10 +31,14 @@ const update = async (name, id) => {
   return result;
 };
 
-const validProductId = async (productId) => {
+const validId = async (productId) => {
   const ids = await ModelProduct.getIdProducts();
 
   return ids.map(({ id }) => id).includes(Number(productId));
+};
+
+const deleteById = async (id) => {
+  await ModelProduct.deleteById(id);
 };
 
 module.exports = {
@@ -42,5 +46,6 @@ module.exports = {
   getById,
   create,
   update,
-  validProductId,
+  validId,
+  deleteById,
 };

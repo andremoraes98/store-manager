@@ -27,7 +27,7 @@ const validateNameLength = (req, res, next) => {
 const validateId = async (req, res, next) => {
   const { id } = req.params;
 
-  const isIdValid = await ServiceProducts.validProductId(id);
+  const isIdValid = await ServiceProducts.validId(id);
 
   if (!isIdValid) {
     return res

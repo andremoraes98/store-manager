@@ -41,6 +41,10 @@ app.put('/products/:id',
   MiddlewaresProducts.validateId,
   ControllerProducts.update);
 
+app.delete('/products/:id',
+  MiddlewaresProducts.validateId,
+  ControllerProducts.deleteById);
+
 // não remova essa exportação, é para o avaliador funcionar
 // você pode registrar suas rotas normalmente, como o exemplo acima
 // você deve usar o arquivo index.js para executar sua aplicação 
