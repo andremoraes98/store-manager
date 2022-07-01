@@ -43,7 +43,9 @@ const getAll = async () => {
   INNER JOIN
     StoreManager.sales
   ON
-    sales_products.sale_id = sales.id`;
+    sales_products.sale_id = sales.id
+  ORDER BY
+    sales_products.sale_id, sales_products.product_id`;
   
   const result = await connection.query(query);
 
