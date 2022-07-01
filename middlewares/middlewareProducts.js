@@ -1,3 +1,5 @@
+const ServiceProducts = require('../services/servicesProducts');
+
 const validateName = (req, res, next) => {
   const { name } = req.body;
 
@@ -22,7 +24,22 @@ const validateNameLength = (req, res, next) => {
   next();
 };
 
+const validateId = async (req, res, next) => {
+  const { id } = req.params;
+
+  const isIdValid = await ServiceProducts.validProductId(id);
+
+  if (!isIdValid) {
+    return res
+      .status(404)
+      .json({ message: 'Product not found' });
+  }
+
+  next();
+};
+
 module.exports = {
   validateName,
   validateNameLength,
+  validateId,
 };
