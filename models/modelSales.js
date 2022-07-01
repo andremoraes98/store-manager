@@ -67,7 +67,7 @@ const getById = async (id) => {
   WHERE 
     sp.sale_id = ?`;
   
-  const result = await connection.query(query, [id]);
+  const [result] = await connection.query(query, [id]);
 
   return result;
 };
