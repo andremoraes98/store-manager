@@ -26,8 +26,15 @@ const getAll = async () => {
   return result.map(serialize);
 };
 
+const getById = async (id) => {
+  const result = await ModelSales.getById(id);
+
+  return result.map(serialize);
+};
+
 module.exports = {
   create,
   productIds,
   getAll,
+  getById,
 };
