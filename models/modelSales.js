@@ -71,10 +71,17 @@ const getById = async (id) => {
 
   return result;
 };
+
+const getSalesId = async () => {
+  const [result] = await connection.query('SELECT id FROM StoreManager.sales');
+
+  return result;
+};
   
 module.exports = {
   createSaleProduct,
   getIdProducts,
   getAll,
   getById,
+  getSalesId,
 };

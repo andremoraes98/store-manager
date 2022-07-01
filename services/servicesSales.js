@@ -32,9 +32,16 @@ const getById = async (id) => {
   return result.map(serialize);
 };
 
+const validSalesId = async (saleId) => {
+  const result = await ModelSales.getSalesId();
+
+  return result.map(({ id }) => id).includes(Number(saleId));
+};
+
 module.exports = {
   create,
   productIds,
   getAll,
   getById,
+  validSalesId,
 };
