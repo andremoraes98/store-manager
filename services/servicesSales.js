@@ -1,4 +1,3 @@
-/* eslint-disable camelcase */
 const ModelSales = require('../models/modelSales');
 
 const create = async (arrayOfProduct) => {
