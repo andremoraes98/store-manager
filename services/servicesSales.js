@@ -7,13 +7,13 @@ const create = async (arrayOfProduct) => {
   return sale;
 };
 
-const isProductIdValid = async (productId) => {
+const productId = async () => {
   const allProducts = await ModelSales.getIdProducts();
 
-  return allProducts.includes(productId);
+  return (allProducts).map(({ id }) => id);
 };
 
 module.exports = {
   create,
-  isProductIdValid,
+  productId,
 };

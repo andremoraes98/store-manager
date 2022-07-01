@@ -1,4 +1,6 @@
-const validateProductId = (req, res, next) => {
+const ServiceSale = require('../services/servicesSales');
+
+const validateProductId = async (req, res, next) => {
   const arrayOfProducts = req.body;
 
   const invalidProductId = arrayOfProducts
@@ -43,8 +45,25 @@ const validateQuantityLength = (req, res, next) => {
   next();
 };
 
+const validateIfProductExists = async (req, res, next) => {
+  const arrayOfProducts = req.body;
+  const idProducts = await ServiceSale.productId();
+
+  const productIdNotFind = arrayOfProducts
+    .find(({ productId }) => !(idProducts.includes(productId)));
+
+  if (productIdNotFind) {
+    return res
+      .status(404)
+      .json({ message: 'Product not found' });
+  }
+
+  next();
+};
+
 module.exports = {
   validateProductId,
   validateQuantity,
   validateQuantityLength,
+  validateIfProductExists,
 };

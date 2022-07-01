@@ -19,13 +19,13 @@ const createSaleProduct = async (arrayOfProduct) => {
   });
 
   return {
-    saleId,
+    id: saleId,
     itemsSold: arrayOfProduct,
   };
 };
 
 const getIdProducts = async () => {
-  const idProducts = await connection
+  const [idProducts] = await connection
     .query('SELECT id FROM StoreManager.products');
   
   return idProducts;
