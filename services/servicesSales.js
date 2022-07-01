@@ -1,4 +1,5 @@
 const ModelSales = require('../models/modelSales');
+const ModelProducts = require('../models/modelProducts');
 
 const create = async (arrayOfProduct) => {
   const sale = await ModelSales
@@ -8,7 +9,7 @@ const create = async (arrayOfProduct) => {
 };
 
 const productIds = async () => {
-  const allProducts = await ModelSales.getIdProducts();
+  const allProducts = await ModelProducts.getIdProducts();
 
   return (allProducts).map(({ id }) => id);
 };

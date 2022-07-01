@@ -25,8 +25,22 @@ const create = async (name) => {
   return product;
 };
 
+const update = async (name, id) => {
+  const result = await ModelProduct.update(name, id);
+  
+  return result;
+};
+
+const validProductId = async (productId) => {
+  const ids = await ModelProduct.getIdProducts();
+
+  return ids.map(({ id }) => id).includes(Number(productId));
+};
+
 module.exports = {
   getAll,
   getById,
   create,
+  update,
+  validProductId,
 };
