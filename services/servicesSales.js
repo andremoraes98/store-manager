@@ -13,7 +13,14 @@ const productId = async () => {
   return (allProducts).map(({ id }) => id);
 };
 
+const getAll = async () => {
+  const result = await ModelSales.getAll();
+
+  return result;
+};
+
 module.exports = {
   create,
   productId,
+  getAll,
 };
