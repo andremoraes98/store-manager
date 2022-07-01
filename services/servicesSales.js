@@ -8,15 +8,15 @@ const create = async (arrayOfProduct) => {
   return sale;
 };
 
-const productId = async () => {
+const productIds = async () => {
   const allProducts = await ModelSales.getIdProducts();
 
   return (allProducts).map(({ id }) => id);
 };
 
-const serialize = ({ date, product_id, quantity, sale_id }) => ({
-    saleId: sale_id,
-    productId: product_id,
+const serialize = ({ date, product_id: productId, quantity, sale_id: saleId }) => ({
+    saleId,
+    productId,
     date,
     quantity,
   });
@@ -29,6 +29,6 @@ const getAll = async () => {
 
 module.exports = {
   create,
-  productId,
+  productIds,
   getAll,
 };

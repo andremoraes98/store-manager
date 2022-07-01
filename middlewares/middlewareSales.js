@@ -47,7 +47,7 @@ const validateQuantityLength = (req, res, next) => {
 
 const validateIfProductExists = async (req, res, next) => {
   const arrayOfProducts = req.body;
-  const idProducts = await ServiceSale.productId();
+  const idProducts = await ServiceSale.productIds();
 
   const productIdNotFind = arrayOfProducts
     .find(({ productId }) => !(idProducts.includes(productId)));
