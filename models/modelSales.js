@@ -11,7 +11,7 @@ const create = async () => {
 const createSaleProduct = async (arrayOfProduct) => {
   const saleId = await create();
 
-  arrayOfProduct.map(async ({ productId, quantity }) => {
+  arrayOfProduct.forEach(async ({ productId, quantity }) => {
     await connection.query(
       'INSERT INTO StoreManager.sales_products (sale_id, product_id, quantity) VALUES (?, ?, ?);',
       [saleId, productId, quantity],
@@ -83,6 +83,20 @@ const deleteById = async (id) => {
 
   return null;
 };
+
+const updateById = (saleId, arrayOfProduct) => {
+  arrayOfProduct.forEach(async ({ productId, quantity }) => {
+    await connection.query(
+      'UPDATE StoreManager.sales_products SET product_id = ?, quantity = ? WHERE sale_id = ?;',
+      [productId, quantity, saleId],
+    );
+  });
+
+  return {
+    saleId,
+    itemsUpdated: arrayOfProduct,
+  };
+};
   
 module.exports = {
   createSaleProduct,
@@ -90,4 +104,5 @@ module.exports = {
   getById,
   getSalesId,
   deleteById,
+  updateById,
 };
