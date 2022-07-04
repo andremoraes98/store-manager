@@ -11,12 +11,11 @@ const create = async () => {
 const createSaleProduct = async (arrayOfProduct) => {
   const saleId = await create();
 
-  arrayOfProduct.forEach(async ({ productId, quantity }) => {
-    await connection.query(
+  await Promise.all(arrayOfProduct.map(({ productId, quantity }) => connection
+    .query(
       'INSERT INTO StoreManager.sales_products (sale_id, product_id, quantity) VALUES (?, ?, ?);',
       [saleId, productId, quantity],
-    );
-  });
+    )));
 
   return {
     id: saleId,
