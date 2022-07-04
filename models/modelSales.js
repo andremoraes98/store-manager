@@ -45,21 +45,21 @@ const getAll = async () => {
 };
 
 const getById = async (id) => {
-  const query = `
-  SELECT
-    s.date,
-    sp.product_id,
-    sp.quantity
-  FROM 
-    StoreManager.sales as s
-  INNER JOIN
-    StoreManager.sales_products as sp
-  ON
-    s.id = sp.sale_id
-  WHERE 
-    sp.sale_id = ?`;
-  
-  const [result] = await connection.query(query, [id]);
+  const [result] = await connection.query(
+    `SELECT
+      s.date,
+      sp.product_id,
+      sp.quantity
+    FROM 
+      StoreManager.sales as s
+    INNER JOIN
+      StoreManager.sales_products as sp
+    ON
+      s.id = sp.sale_id
+    WHERE 
+      sp.sale_id = ?`,
+    [id],
+  );
 
   return result;
 };
@@ -105,4 +105,5 @@ module.exports = {
   getSalesId,
   deleteById,
   updateById,
+  create,
 };
