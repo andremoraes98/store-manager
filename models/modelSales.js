@@ -87,8 +87,10 @@ const deleteById = async (id) => {
 const updateById = (saleId, arrayOfProduct) => {
   arrayOfProduct.forEach(async ({ productId, quantity }) => {
     await connection.query(
-      'UPDATE StoreManager.sales_products SET product_id = ?, quantity = ? WHERE sale_id = ?;',
-      [productId, quantity, saleId],
+      `UPDATE StoreManager.sales_products
+      SET product_id = ?, quantity = ?
+      WHERE sale_id = ? AND product_id = ?;`,
+      [productId, quantity, saleId, productId],
     );
   });
 

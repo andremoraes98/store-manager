@@ -49,7 +49,13 @@ app.delete('/sales/:id',
   MiddlewaresSales.validateIfSalesIdExists,
   ControllerSales.deleteById);
 
-app.put('sales/:id');
+app.put('/sales/:id',
+  MiddlewaresSales.validateProductId,
+  MiddlewaresSales.validateQuantity,
+  MiddlewaresSales.validateQuantityLength,
+  MiddlewaresSales.validateIfProductExists,
+  MiddlewaresSales.validateIfSalesIdExists,
+  ControllerSales.updateById);
 
 // não remova essa exportação, é para o avaliador funcionar
 // você pode registrar suas rotas normalmente, como o exemplo acima

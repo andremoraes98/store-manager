@@ -45,6 +45,12 @@ const deleteById = async (id) => {
   return null;
 };
 
+const updateById = async (id, arrayOfProduct) => {
+  const result = await ModelSales.updateById(id, arrayOfProduct);
+
+  return result;
+};
+
 module.exports = {
   create,
   productIds,
@@ -52,4 +58,5 @@ module.exports = {
   getById,
   validSalesId,
   deleteById,
+  updateById,
 };

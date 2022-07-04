@@ -28,10 +28,20 @@ const deleteById = async (req, res) => {
 
   res.status(204).end();
 };
+
+const updateById = async (req, res) => {
+  const { id } = req.params;
+  const arrayOfProduct = req.body;
+
+  const result = await ServicesSales.updateById(id, arrayOfProduct);
+
+  res.status(200).json(result);
+};
   
 module.exports = {
   create,
   getAll,
   getById,
   deleteById,
+  updateById,
 };
