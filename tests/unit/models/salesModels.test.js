@@ -184,7 +184,7 @@ describe('Atualiza um produto', () => {
       connection.query.restore();
     });
 
-    it('que tenha uma chave "id" e "itemsUpdated".', async () => {
+    it('que tenha uma chave "saleId" e "itemsUpdated".', async () => {
       const ID = '1';
       const createSale = [
         {
@@ -199,7 +199,7 @@ describe('Atualiza um produto', () => {
 
       const result = await ModelSales.updateById(ID, createSale);
 
-      expect(result).to.be.a('object').with.keys('id', 'itemsUpdated');
+      expect(result).to.be.a('object').with.keys('saleId', 'itemsUpdated');
     });
   });
 });
