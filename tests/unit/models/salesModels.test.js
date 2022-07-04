@@ -176,17 +176,6 @@ describe('Deleta um produto', () => {
 
 describe('Atualiza um produto', () => {
   describe('espera que seja retornado um objeto', () => {
-    const createSale = [
-      {
-        productId: 1,
-        quantity: 99,
-      },
-      {
-        productId: 2,
-        quantity: 99,
-      },
-    ];
-
     before(() => {
       sinon.stub(connection, 'query');
     });
@@ -197,6 +186,16 @@ describe('Atualiza um produto', () => {
 
     it('que tenha uma chave "id" e "itemsUpdated".', async () => {
       const ID = '1';
+      const createSale = [
+        {
+          productId: 1,
+          quantity: 99,
+        },
+        {
+          productId: 2,
+          quantity: 99,
+        },
+      ];
 
       const result = await ModelSales.updateById(ID, createSale);
 
