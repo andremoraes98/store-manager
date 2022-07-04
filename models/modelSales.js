@@ -84,15 +84,14 @@ const deleteById = async (id) => {
   return null;
 };
 
-const updateById = (saleId, arrayOfProduct) => {
-  arrayOfProduct.forEach(async ({ productId, quantity }) => {
-    await connection.query(
+const updateById = async (saleId, arrayOfProduct) => {
+  await Promise.all(arrayOfProduct.map(({ productId, quantity }) => connection
+    .query(
       `UPDATE StoreManager.sales_products
       SET product_id = ?, quantity = ?
       WHERE sale_id = ? AND product_id = ?;`,
       [productId, quantity, saleId, productId],
-    );
-  });
+    )));
 
   return {
     saleId,
