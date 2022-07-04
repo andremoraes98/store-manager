@@ -15,6 +15,8 @@ app.get('/', (_request, response) => {
 
 app.get('/products', ControllerProducts.getAll);
 
+app.get('/products/search', ControllerProducts.searchByTerm);
+
 app.get('/products/:id', ControllerProducts.getById);
 
 app.post('/products',

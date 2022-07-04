@@ -41,6 +41,12 @@ const deleteById = async (id) => {
   await ModelProduct.deleteById(id);
 };
 
+const searchByTerm = async (term) => {
+  const result = await ModelProduct.searchByTerm(term);
+
+  return result;
+};
+
 module.exports = {
   getAll,
   getById,
@@ -48,4 +54,5 @@ module.exports = {
   update,
   validId,
   deleteById,
+  searchByTerm,
 };

@@ -55,9 +55,8 @@ const deleteById = async (id) => {
 };
 
 const searchByTerm = async (term) => {
-  const result = await connection.query(
-    'SELECT * FROM StoreManager.products WHERE name LIKE "%?%";',
-    [term],
+  const [result] = await connection.query(
+    `SELECT * FROM StoreManager.products WHERE name LIKE "%${term}%";`,
   );
 
   return result;

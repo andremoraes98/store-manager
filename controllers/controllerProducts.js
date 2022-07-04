@@ -43,10 +43,19 @@ const deleteById = async (req, res) => {
   res.status(204).end();
 };
 
+const searchByTerm = async (req, res) => {
+  const { q } = req.query;
+
+  const result = await ServiceProducts.searchByTerm(q);
+  
+  res.status(200).json(result);
+};
+
 module.exports = {
   getAll,
   getById,
   create,
   update,
   deleteById,
+  searchByTerm,
 };
