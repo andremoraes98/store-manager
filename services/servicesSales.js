@@ -30,7 +30,9 @@ const getAll = async () => {
 const getById = async (id) => {
   const result = await ModelSales.getById(id);
 
-  return result.map(serialize);
+  return result
+    .map(serialize)
+    .map(({ date, productId, quantity }) => ({ productId, date, quantity }));
 };
 
 const validSalesId = async (saleId) => {
