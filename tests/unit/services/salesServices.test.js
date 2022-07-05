@@ -2,6 +2,7 @@ const { expect } = require('chai');
 const sinon = require('sinon');
 
 const SalesModels = require('../../../models/modelSales');
+const ProductsModels = require('../../../models/modelProducts');
 const SalesServices = require('../../../services/servicesSales');
 
 describe('Valida as compras recebidas', () => {
@@ -175,5 +176,99 @@ describe('Valida o produto atualizado', () => {
     const product = await SalesServices.updateById(ID, arrayOfProduct);
 
     expect(product).to.be.a('object').with.keys('saleId', 'itemsUpdated');
+  });
+});
+
+describe('Retorna todos os ids de produtos existentes', () => {
+  before(() => {
+    const idProducts = [
+      { id: 1 },
+      { id: 2 },
+      { id: 3 },
+    ];
+
+    sinon.stub(ProductsModels, 'getIdProducts').resolves(idProducts);
+  })
+
+  after(() => {
+    ProductsModels.getIdProducts.restore();
+  });
+
+  it('espera que o retorno seja um "array".', async () => {
+    const result = await SalesServices.productIds();
+
+    expect(result).to.be.an('array');
+  });
+});
+
+describe('Valida se o id da compra existe', () => {
+  before(() => {
+    const idSales = [
+      { id: 1 },
+      { id: 2 },
+      { id: 3 },
+    ];
+
+    sinon.stub(SalesModels, 'getSalesId').resolves(idSales);
+  })
+
+  after(() => {
+    SalesModels.getSalesId.restore();
+  });
+
+  it('se o id da compra existir, espera que o retorno seja "true".', async () => {
+    const bool = await SalesServices.validSalesId(1);
+
+    expect(bool).to.be.true;
+  });
+
+  it('se o id da compra não existir, espera que o retorno seja "false".', async () => {
+    const bool = await SalesServices.validSalesId(99);
+
+    expect(bool).to.be.false;
+  });
+});
+
+describe('Valida se o id da compra existe', () => {
+  before(() => {
+    const idSales = [
+      { id: 1 },
+      { id: 2 },
+      { id: 3 },
+    ];
+
+    sinon.stub(SalesModels, 'getSalesId').resolves(idSales);
+  })
+
+  after(() => {
+    SalesModels.getSalesId.restore();
+  });
+
+  it('se o id da compra existir, espera que o retorno seja "true".', async () => {
+    const bool = await SalesServices.validSalesId(1);
+
+    expect(bool).to.be.true;
+  });
+
+  it('se o id da compra não existir, espera que o retorno seja "false".', async () => {
+    const bool = await SalesServices.validSalesId(99);
+
+    expect(bool).to.be.false;
+  });
+});
+
+describe('Valida se a compra foi deletada', () => {
+  before(() => {
+    sinon.stub(SalesModels, 'deleteById');
+  });
+
+  after(() => {
+    SalesModels.deleteById.restore();
+  });
+
+  it('e se a função não tem retorno.', async () => {
+    const result = await SalesServices.deleteById(1);
+
+    expect(result).to.be.null;
   });
 });
