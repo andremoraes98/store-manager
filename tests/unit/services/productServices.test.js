@@ -4,6 +4,12 @@ const sinon = require('sinon');
 const ModelProduct = require('../../../models/modelProducts');
 const ServiceProduct = require('../../../services/servicesProducts');
 
+const PRODUCT_NAME = 'Manopla do Thanos';
+const defaultProduct = {
+  id: 5,
+  name: PRODUCT_NAME,
+};
+
 describe('Valida os produtos recebidos', () => {
   describe('quando não é informado um "id"', () => {
     before(async () => {
@@ -91,25 +97,109 @@ describe('Valida os produtos recebidos', () => {
 });
 
 describe('Valida o produto criado', () => {
-  const PRODUCT_NAME = 'Manopla do Thanos';
-  const createdProduct = {
-    id: 5,
-    name: PRODUCT_NAME,
-  };
-
   before(async () => {
-    sinon.stub(ModelProduct, 'create').resolves(createdProduct);
+    sinon.stub(ModelProduct, 'create').resolves(defaultProduct);
   });
 
   after(async () => {
     ModelProduct.create.restore();
   });
 
-
-
-  it('espera que o retorno seja um objeto com as chaves "id" e "name"..', async () => {
+  it('espera que o retorno seja um objeto com as chaves "id" e "name".', async () => {
     const product = await ServiceProduct.create(PRODUCT_NAME);
 
     expect(product).to.be.a('object').with.keys('id', 'name');
+  });
+});
+
+describe('Valida o produto atualizado', () => {
+  before(async () => {
+    sinon.stub(ModelProduct, 'update').resolves(defaultProduct);
+  })
+
+  after(async () => {
+    ModelProduct.update.restore();
+  });
+
+  it('espera que o retorno seja um objeto com as chaves "id" e "name".', async () => {
+    const product = await ServiceProduct.update(PRODUCT_NAME);
+
+    expect(product).to.be.a('object').with.keys('id', 'name');
+  });
+});
+
+describe('Valida se o id do produto passado existe', () => {
+  before(async () => {
+    const idProducts = [
+      { id: 1 },
+      { id: 2 },
+      { id: 3 },
+    ];
+
+    sinon.stub(ModelProduct, 'getIdProducts').resolves(idProducts);
+  })
+
+  after(async () => {
+    ModelProduct.getIdProducts.restore();
+  });
+
+  it('espera que o retorno "true", caso exista.', async () => {
+    const VALID_ID = 1;
+    const result = await ServiceProduct.validId(VALID_ID);
+
+    expect(result).to.be.true;
+  });
+
+  it('espera que o retorno "false", caso não exista.', async () => {
+    const INVALID_ID = 99;
+    const result = await ServiceProduct.validId(INVALID_ID);
+
+    expect(result).to.be.false;
+  });
+});
+
+describe('Valida se o produto foi deletado', () => {
+  before(() => {
+    sinon.stub(ModelProduct, 'deleteById');
+  });
+
+  after(() => {
+    ModelProduct.deleteById.restore();
+  });
+
+  it('e se a função não tem retorno.', async () => {
+    const result = await ServiceProduct.deleteById(1);
+
+    expect(result).to.be.undefined;
+  });
+});
+
+describe('Valida se o produto filtrado é retornado', () => {
+  before(() => {
+    const product = [
+      {
+        id: 1,
+        name: 'Martelo de Thor',
+      }
+    ];
+    sinon.stub(ModelProduct, 'searchByTerm').resolves(product);
+  });
+
+  after(() => {
+    ModelProduct.searchByTerm.restore();
+  });
+
+  it('espera que seja retornado um "array".', async () => {
+    const result = await ServiceProduct.searchByTerm('Mart');
+
+    expect(result).to.be.an('array');
+  });
+
+  it('espera que o conteúdo do "array" sejam objetos com chaves "id" e "name".', async () => {
+    const result = await ServiceProduct.searchByTerm('Mart');
+
+    result.map((product) => {
+      expect(product).to.be.an('object').with.keys('id', 'name')
+    });
   });
 });
