@@ -4,7 +4,7 @@ const sinon = require('sinon');
 const connection = require('../../../models/connection');
 const ModelSales = require('../../../models/modelSales');
 
-describe('Retorna o ID da compra criada', () => {
+describe('Retorna o ID da venda criada', () => {
   before(async () => {
     const result = [{
       insertId: 1,
@@ -24,7 +24,7 @@ describe('Retorna o ID da compra criada', () => {
   });  
 });
 
-describe('Retorna o ID da compra e os produtos criados', () => {
+describe('Retorna o ID da venda e os produtos criados', () => {
   before(() => {
     const result = [{
       insertId: 1,
@@ -58,7 +58,7 @@ describe('Retorna o ID da compra e os produtos criados', () => {
 
 });
 
-describe('Retorna todas as compras efetuadas', () => {
+describe('Retorna todas as vendas efetuadas', () => {
   const sales = [[
     {
       saleId: 1,
@@ -101,7 +101,7 @@ describe('Retorna todas as compras efetuadas', () => {
   
 });
 
-describe('Retorna todas as compras efetuadas', () => {
+describe('Retorna todas as vendas efetuadas', () => {
   const sales = [[
     {
       productId: 1,
@@ -136,7 +136,7 @@ describe('Retorna todas as compras efetuadas', () => {
 
 });
 
-describe('Retorna os ids das compras', () => {
+describe('Retorna os ids das vendas', () => {
   before(() => {
     const result = [[
       { id: 1 },

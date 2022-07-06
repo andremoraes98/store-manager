@@ -5,7 +5,7 @@ const SalesModels = require('../../../models/modelSales');
 const ProductsModels = require('../../../models/modelProducts');
 const SalesServices = require('../../../services/servicesSales');
 
-describe('Valida as compras recebidas', () => {
+describe('Valida as vendas recebidas', () => {
   describe('quando não é informado um "id"', () => {
     before(() => {
       const sales = [
@@ -201,7 +201,7 @@ describe('Retorna todos os ids de produtos existentes', () => {
   });
 });
 
-describe('Valida se o id da compra existe', () => {
+describe('Valida se o id da venda existe', () => {
   before(() => {
     const idSales = [
       { id: 1 },
@@ -216,20 +216,20 @@ describe('Valida se o id da compra existe', () => {
     SalesModels.getSalesId.restore();
   });
 
-  it('se o id da compra existir, espera que o retorno seja "true".', async () => {
+  it('se o id da venda existir, espera que o retorno seja "true".', async () => {
     const bool = await SalesServices.validSalesId(1);
 
     expect(bool).to.be.true;
   });
 
-  it('se o id da compra não existir, espera que o retorno seja "false".', async () => {
+  it('se o id da venda não existir, espera que o retorno seja "false".', async () => {
     const bool = await SalesServices.validSalesId(99);
 
     expect(bool).to.be.false;
   });
 });
 
-describe('Valida se o id da compra existe', () => {
+describe('Valida se o id da venda existe', () => {
   before(() => {
     const idSales = [
       { id: 1 },
@@ -244,20 +244,20 @@ describe('Valida se o id da compra existe', () => {
     SalesModels.getSalesId.restore();
   });
 
-  it('se o id da compra existir, espera que o retorno seja "true".', async () => {
+  it('se o id da venda existir, espera que o retorno seja "true".', async () => {
     const bool = await SalesServices.validSalesId(1);
 
     expect(bool).to.be.true;
   });
 
-  it('se o id da compra não existir, espera que o retorno seja "false".', async () => {
+  it('se o id da venda não existir, espera que o retorno seja "false".', async () => {
     const bool = await SalesServices.validSalesId(99);
 
     expect(bool).to.be.false;
   });
 });
 
-describe('Valida se a compra foi deletada', () => {
+describe('Valida se a venda foi deletada', () => {
   before(() => {
     sinon.stub(SalesModels, 'deleteById');
   });
